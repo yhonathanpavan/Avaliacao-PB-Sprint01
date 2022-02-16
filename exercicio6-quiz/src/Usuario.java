@@ -4,6 +4,7 @@ public class Usuario {
     private String nome;
     int acertos;
     int erros;
+    static int pontuacaoMaxima;
 
     //Metodos
     public String getNome() {
@@ -20,6 +21,10 @@ public class Usuario {
 
     public int getErros() {
         return erros;
+    }
+
+    public int getPontuacaoMaxima() {
+        return pontuacaoMaxima;
     }
 
     public void acertouPergunta(){
