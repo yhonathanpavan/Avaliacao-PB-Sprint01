@@ -14,10 +14,11 @@ public class ValidaBonificacao {
 
         for(int i = 1; i <= qtdFuncionario; i++){
             Funcionario funcionario = new Funcionario();
+
             System.out.println("Insira o nome do funcionário nº " + i);
-            System.out.println("Nome: ");
+            System.out.print("Nome: ");
             funcionario.setNome(sc.next());
-            System.out.println("Salario: ");
+            System.out.print("Salario: ");
             funcionario.setSalario(sc.nextDouble());
 
             funcionarios.add(funcionario);
@@ -26,6 +27,13 @@ public class ValidaBonificacao {
         for(int i = 0; i < funcionarios.size(); i++){
             System.out.println(funcionarios.get(i).getNome());
             System.out.println(funcionarios.get(i).getSalario());
+
+            if(funcionarios.get(i).getSalario() > 2000){
+                System.out.println(funcionarios.get(i).getDesconto());
+            }else {
+                System.out.println(funcionarios.get(i).getBonus());
+            }
+            System.out.println(funcionarios.get(i).getSalarioLiquido());
             System.out.println();
         }
 

@@ -6,6 +6,12 @@ public class Funcionario {
     double bonus;
     double salarioLiquido;
 
+    public double getDesconto() {
+        return desconto;
+    }
+
+    double desconto = 0;
+
     //Metodos
     public String getNome() {
         return nome;
@@ -20,22 +26,33 @@ public class Funcionario {
     }
 
     public void setSalario(double salario) {
-        this.salario = salario;
+        if(salario>= 0) {
+
+            this.salario = salario;
+
+            if (salario <= 1000) {
+                this.bonus = salario * 0.2;
+            }
+            else if (salario <= 2000) {
+                this.bonus = salario * 0.1;
+            }
+            else {
+                this.desconto = salario * 0.1;
+            }
+            this.salarioLiquido = (salario - desconto) + bonus;
+            System.out.println(this.salarioLiquido);
+        }else{
+            System.out.println("Não é permitido valores negativos!");
+        }
+
     }
 
     public double getBonus() {
         return bonus;
     }
 
-    public void setBonus(double bonus) {
-        this.bonus = bonus;
-    }
-
     public double getSalarioLiquido() {
         return salarioLiquido;
     }
 
-    public void setSalarioLiquido(double salarioLiquido) {
-        this.salarioLiquido = salarioLiquido;
-    }
 }
