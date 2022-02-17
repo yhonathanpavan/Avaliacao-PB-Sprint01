@@ -4,121 +4,49 @@ import java.util.Scanner;
 
 public class Quiz {
 
-    public static void main(String[] args) {
+    //Usuarios
+    static List<Usuario> usuarios = new ArrayList<>();
+    static List<String> perguntas = new ArrayList<>();
+    static List<String> respostas = new ArrayList<>();
+    //Scanner
+    static Scanner sc = new Scanner(System.in);
+    static int indexUsuario = 0;
 
-        //Usuarios
-        List<Usuario> usuarios = new ArrayList<>();
-
+    public static void main(String[] args){
 
         //Perguntas
-        List<String> perguntas = new ArrayList<>();
         perguntas.add("O que a pomba branca simboliza?");
         perguntas.add("Qual o sétimo mês do ano?");
         perguntas.add("Norte, sul, leste e...?");
         perguntas.add("Qual é o maior animal terrestre vivo conhecido?");
 
         //Respostas
-        List<String> respostas = new ArrayList<>();
         respostas.add("paz");
         respostas.add("julho");
         respostas.add("oeste");
         respostas.add("elefante");
 
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("                                                       (_)    ");
-        System.out.println("   ___ ___  _ __ ___  _ __   __ _ ___ ___    __ _ _   _ _ ____");
-        System.out.println("  / __/ _ \\| '_ ` _ \\| '_ \\ / _` / __/ __|  / _` | | | | |_  /");
-        System.out.println(" | (_| (_) | | | | | | |_) | (_| \\__ \\__ \\ | (_| | |_| | |/ / ");
-        System.out.println("  \\___\\___/|_| |_| |_| .__/ \\__,_|___/___/  \\__, |\\__,_|_/___|");
-        System.out.println("                     | |                       | |            ");
-        System.out.println("                     |_|                       |_|  ");
-
+        logoCompassQuiz();
 
         int opcaoMenu;
-        int indexUsuario = 0;
-        Usuario usuarioAtual;
 
         do {
-            System.out.println("****** Menu ******");
-            System.out.println("1. Responder Perguntas");
-            System.out.println("2. Ver recordes");
-            System.out.println("3. Sair");
-            System.out.print("Opção: ");
+
+            exibirMenu();
             opcaoMenu = sc.nextInt();
 
             switch (opcaoMenu) {
 
                 case 1:
-                    Usuario usuario = new Usuario();
-                    usuarios.add(usuario);
-
-                    usuarioAtual = usuarios.get(indexUsuario);
-
-                    System.out.println();
-                    System.out.print("Insira seu nome: ");
-                    usuarios.get(indexUsuario).setNome(sc.next());
-
-                    int qtdPerguntas = 0;
-
-                    String resposta;
-
-                    System.out.println("Bem vindo, " + usuarioAtual.getNome() + "!");
-
-
-                    do {
-                        System.out.println();
-                        System.out.println("Pergunta nº " + (qtdPerguntas + 1) + ": ");
-                        System.out.println(perguntas.get(qtdPerguntas));
-                        System.out.print("resposta: ");
-                        resposta = sc.next().toLowerCase();
-
-                        if (resposta.equals(respostas.get(qtdPerguntas))) {
-                            System.out.println("Parabens!!");
-                            usuarioAtual.acertouPergunta();
-
-                        } else {
-                            System.out.println("Errou!");
-                            System.out.println("A resposta correta é: " + respostas.get(qtdPerguntas));
-                            usuarioAtual.errouPergunta();
-                        }
-                        qtdPerguntas++;
-
-                    } while (qtdPerguntas < perguntas.size());
-
-                    System.out.println();
-                    System.out.println("+------------------------+");
-                    System.out.println("| Usuario: " + usuarioAtual.getNome());
-                    System.out.println("+------------------------+");
-                    System.out.println("| Acertos: " + usuarioAtual.getAcertos());
-                    System.out.println("+------------------------+");
-                    System.out.println("| Erros: " + usuarioAtual.getErros());
-                    System.out.println("+------------------------+");
-                    System.out.println();
-
-                    indexUsuario++;
+                    responderPerguntas();
                     break;
 
                 case 2:
-                    System.out.println();
-                    int recorde = 0;
-                    for(int i = 0; i < usuarios.size(); i++){
-                        System.out.println("+------------------------------------------------------");
-                        System.out.println("| Jogador: " + usuarios.get(i).getNome() + " -> Pontuação: " + usuarios.get(i).getAcertos());
-                        if(usuarios.get(i).getAcertos() > recorde){
-                            recorde = usuarios.get(i).getAcertos();
-                        }
-                    }
-                    System.out.println("+------------------------------------------------------");
-                    System.out.println("| Pontuação máxima no quiz: " + recorde);
-                    System.out.println("+------------------------------------------------------");
-                    System.out.println();
-
+                    verRecordes();
                     break;
 
                 case 3:
                     System.out.println("Saindo do sistema...");
-                    System.exit(1);
                     break;
 
                 default:
@@ -129,7 +57,95 @@ public class Quiz {
 
 
         } while (opcaoMenu != 3);
+        System.exit(1);
+    }
 
+    public static void logoCompassQuiz(){
+        System.out.println("                                                       (_)    ");
+        System.out.println("   ___ ___  _ __ ___  _ __   __ _ ___ ___    __ _ _   _ _ ____");
+        System.out.println("  / __/ _ \\| '_ ` _ \\| '_ \\ / _` / __/ __|  / _` | | | | |_  /");
+        System.out.println(" | (_| (_) | | | | | | |_) | (_| \\__ \\__ \\ | (_| | |_| | |/ / ");
+        System.out.println("  \\___\\___/|_| |_| |_| .__/ \\__,_|___/___/  \\__, |\\__,_|_/___|");
+        System.out.println("                     | |                       | |            ");
+        System.out.println("                     |_|                       |_|  ");
+    }
+
+    public static void exibirMenu(){
+        System.out.println("****** Menu ******");
+        System.out.println("1. Responder Perguntas");
+        System.out.println("2. Ver recordes");
+        System.out.println("3. Sair");
+        System.out.print("Opção: ");
+    }
+
+    public static void responderPerguntas(){
+
+        Usuario usuarioAtual;
+        String perguntaAtual;
+        String respostaAtual;
+        Usuario usuario = new Usuario();
+        usuarios.add(usuario);
+
+        usuarioAtual = usuarios.get(indexUsuario);
+
+        System.out.println();
+        System.out.print("Insira seu nome: ");
+        usuarios.get(indexUsuario).setNome(sc.next());
+
+        int i = 0;
+
+        System.out.println("Bem vindo, " + usuarioAtual.getNome() + "!");
+
+
+        do {
+            perguntaAtual = perguntas.get(i);
+            respostaAtual = respostas.get(i);
+
+            System.out.println();
+            System.out.println("Pergunta nº " + (i + 1) + ": ");
+            System.out.println(perguntaAtual);
+            System.out.print("resposta: ");
+            String respostaInserida = sc.next().toLowerCase();
+
+            if (respostaInserida.equals(respostaAtual)) {
+                System.out.println("Parabens!!");
+                usuarioAtual.acertouPergunta();
+
+            } else {
+                System.out.println("Errou!");
+                System.out.println("A resposta correta é: " + respostaAtual);
+                usuarioAtual.errouPergunta();
+            }
+            i++;
+
+        } while (i < perguntas.size());
+
+        System.out.println();
+        System.out.println("+------------------------+");
+        System.out.println("| Usuario: " + usuarioAtual.getNome());
+        System.out.println("+------------------------+");
+        System.out.println("| Acertos: " + usuarioAtual.getAcertos());
+        System.out.println("+------------------------+");
+        System.out.println("| Erros: " + usuarioAtual.getErros());
+        System.out.println("+------------------------+");
+        System.out.println();
+        indexUsuario++;
+    }
+
+    public static void verRecordes(){
+        System.out.println();
+        int recorde = 0;
+        for(int i = 0; i < usuarios.size(); i++){
+            System.out.println("+------------------------------------------------------");
+            System.out.println("| Jogador: " + usuarios.get(i).getNome() + " -> Pontuação: " + usuarios.get(i).getAcertos());
+            if(usuarios.get(i).getAcertos() > recorde){
+                recorde = usuarios.get(i).getAcertos();
+            }
+        }
+        System.out.println("+------------------------------------------------------");
+        System.out.println("| Pontuação máxima no quiz: " + recorde);
+        System.out.println("+------------------------------------------------------");
+        System.out.println();
     }
 
 }
