@@ -2,9 +2,8 @@ public class Usuario {
 
     //Atributos
     private String nome;
-    int acertos;
-    int erros;
-    static int pontuacaoMaxima;
+    private int acertos;
+    private int erros;
 
     //Metodos
     public String getNome() {
@@ -13,18 +12,14 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
 
+    }
     public int getAcertos() {
         return acertos;
     }
 
     public int getErros() {
         return erros;
-    }
-
-    public int getPontuacaoMaxima() {
-        return pontuacaoMaxima;
     }
 
     public void acertouPergunta(){
