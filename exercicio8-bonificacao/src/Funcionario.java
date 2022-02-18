@@ -1,3 +1,5 @@
+import java.security.PublicKey;
+
 public class Funcionario {
 
     //Atributos
@@ -5,27 +7,15 @@ public class Funcionario {
     double salario;
     double bonus;
     double salarioLiquido;
+    double desconto = 0;
+
 
     public double getDesconto() {
         return desconto;
     }
 
-    double desconto = 0;
-
     //Metodos
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
+    public Funcionario(String nome, double salario){
         if(salario>= 0) {
 
             this.salario = salario;
@@ -40,11 +30,20 @@ public class Funcionario {
                 this.desconto = salario * 0.1;
             }
             this.salarioLiquido = (salario - desconto) + bonus;
-            System.out.println(this.salarioLiquido);
         }else{
             System.out.println("Não é permitido valores negativos!");
+            System.exit(1);
         }
 
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getSalario() {
+        return salario;
     }
 
     public double getBonus() {

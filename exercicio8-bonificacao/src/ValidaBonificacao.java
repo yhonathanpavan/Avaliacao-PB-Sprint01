@@ -2,25 +2,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ValidaBonificacao {
+    public class ValidaBonificacao {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         List<Funcionario> funcionarios = new ArrayList<>();
 
+        String nomeInformado;
+        double salarioInformado;
+
         System.out.print("Informe a quantidade de funcionarios que deseja cadastrar: ");
         int qtdFuncionario = sc.nextInt();
 
         for(int i = 1; i <= qtdFuncionario; i++){
-            Funcionario funcionario = new Funcionario();
-
             System.out.println("Insira o nome do funcionário nº " + i);
             System.out.print("Nome: ");
-            funcionario.setNome(sc.next());
+            nomeInformado = sc.next();
             System.out.print("Salario: ");
-            funcionario.setSalario(sc.nextDouble());
+            salarioInformado = sc.nextDouble();
 
+            Funcionario funcionario = new Funcionario(nomeInformado, salarioInformado);
             funcionarios.add(funcionario);
         }
 
