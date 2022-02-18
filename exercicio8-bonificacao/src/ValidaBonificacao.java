@@ -15,10 +15,12 @@ import java.util.Scanner;
         System.out.print("Informe a quantidade de funcionarios que deseja cadastrar: ");
         int qtdFuncionario = sc.nextInt();
 
+
         for(int i = 1; i <= qtdFuncionario; i++){
-            System.out.println("Insira o nome do funcionário nº " + i);
+            System.out.println("\nInsira o nome do funcionário nº " + i);
             System.out.print("Nome: ");
-            nomeInformado = sc.next();
+            sc.nextLine(); //apenas para remover o "enter" da entrada anterior.
+            nomeInformado = sc.nextLine();
             System.out.print("Salario: ");
             salarioInformado = sc.nextDouble();
 
@@ -26,16 +28,22 @@ import java.util.Scanner;
             funcionarios.add(funcionario);
         }
 
+        System.out.println();
+        Funcionario funcionarioAtual;
+
         for(int i = 0; i < funcionarios.size(); i++){
-            System.out.println(funcionarios.get(i).getNome());
-            System.out.println(funcionarios.get(i).getSalario());
+            funcionarioAtual = funcionarios.get(i);
+            System.out.println("+--------------------------------------------");
+            System.out.println("| Nome: " +  funcionarioAtual.getNome());
+            System.out.println("| Salário: R$" + funcionarioAtual.getSalario());
 
             if(funcionarios.get(i).getSalario() > 2000){
-                System.out.println(funcionarios.get(i).getDesconto());
+                System.out.println("| Desconto: R$" + funcionarioAtual.getDesconto());
             }else {
-                System.out.println(funcionarios.get(i).getBonus());
+                System.out.println("| Bônus: R$" + funcionarioAtual.getBonus());
             }
-            System.out.println(funcionarios.get(i).getSalarioLiquido());
+            System.out.println("| Salário Líquido: R$" + funcionarioAtual.getSalarioLiquido());
+            System.out.println("+--------------------------------------------");
             System.out.println();
         }
 
