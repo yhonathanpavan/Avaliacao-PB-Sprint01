@@ -81,6 +81,7 @@ public class Login {
         String loginUsuario;
         String senhaUsuario;
 
+        boolean loginIncorreto = true;
 
             for (int i = 0; i < users.size(); i++) {
 
@@ -98,8 +99,13 @@ public class Login {
                     } else if (horaEmNumero >= 0 && horaEmNumero < 6) {
                         System.out.println("Boa madrugada,você se logou ao nosso sistema.");
                     }
-
+                    loginIncorreto = false;
                 }
+
+            }
+
+            if(loginIncorreto){
+                System.out.println("Usuário e/ou senha incorretos.");
             }
         }
     }
