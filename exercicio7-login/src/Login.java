@@ -31,6 +31,7 @@ public class Login {
 
                 case 3:
                     System.out.println("Finalizando Sistema...");
+                    break;
 
                 default:
                     System.out.println("opcao invalida! \n");
