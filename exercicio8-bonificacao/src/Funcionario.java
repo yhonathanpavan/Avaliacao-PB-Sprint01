@@ -1,5 +1,3 @@
-import java.security.PublicKey;
-
 public class Funcionario {
 
     //Atributos
